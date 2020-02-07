@@ -1,17 +1,13 @@
 
 to build:
-docker build -t nvidia-base-game-app-xorg-gl-unity .
-[old] docker build -t nvidia-base-game-app-xorg-gl .
-[older] docker build -t nvidia-base-game-app-xorg .
+docker build -t <your nvidia-base-game-app name here> .
 
 to run:
-x11docker --hostdisplay --gpu nvidia-base-game-app-xorg-gl-unity xterm
-[old] x11docker --hostdisplay --gpu nvidia-base-game-app-xorg-gl xterm
-[older] x11docker --hostdisplay --gpu nvidia-base-game-app-xorg xterm
+x11docker --hostdisplay --gpu <your nvidia-base-game-app name here> xterm
 
 or use xorg bash script
 
-to run game - go to:
+to run game in xterm - go to:
 cd home/app
 
 then:
