@@ -1,1 +1,86 @@
+make sure the xpraHTML5 files are in the usr/share/xpra/www/ folder:
+
+usr/share/xpra/www/ all root files
+usr/share/xpra/www/js all js files
+usr/share/xpra/www/css all css files
+usr/share/xpra/www/icons all icons files
+
+etc
+
+############################## direct connection tcp ###################
+
+host machine:
+xpra start :[some display number up to 4 digits] --start-child=xterm --bind-tcp=0.0.0.0:[some port number up to 5 digits]
+
+eg: xpra start :9998 --start-child=xterm --bind-tcp=0.0.0.0:10000
+
+remote machine:
+xpra attach tcp:[ip address of host machine - only 172.17.0.1 if on same machine as host]:[same port number as server/host machine]
+
+eg:xpra attach tcp:172.17.0.1:10000
+
+############################## direct connection ssh ###################
+
+set ssh password first:
+ssh -l <username> <servername>
+
+host machine:
+xpra start :[some display number up to 4 digits] --start-child=xterm
+
+eg: xpra start :9999 --start-child=xterm
+
+remote machine:
+xpra attach ssh://[remotehost_name]@[remotehostIP]/[display number]
+
+############################## html connection tcp ###################
+
+host machine:
+xpra start :[some display number up to 4 digits] --start-child=xterm --bind-tcp=0.0.0.0:[some port number up to 5 digits] --html=on
+
+eg: xpra start :9999 --start-child=xterm --bind-tcp=0.0.0.0:10000 --html=on
+
+remote machine:
+xpra attach tcp:[ip address of host machine - only 172.17.0.1 if on same machine as host]:[same port number as server/host machine]
+
+eg:xpra attach tcp:172.17.0.1:10002
+
+############################## html connection ssh ###################
+
+set ssh password first:
+ssh -l <username> <servername>
+
+host machine:
+xpra start :[some display number up to 4 digits] --start-child=xterm
+
+eg: xpra start :9999 --start-child=xterm
+
+remote machine:
+xpra attach ssh://[remotehost_name]@[remotehostIP]/[display number]
+
+############################## remote docker image via xpra tcp ###
+
+host machine (put in script file and run ./ from cmd change permission to exec):
+read Xenv < <(x11docker --xvfb --display=9999 --no-auth --showenv <your nvidia-base-game-app here> xterm)
+env $Xenv xpra start :9999 --use-display --start-via-proxy=no --daemon=no --bind-tcp=0.0.0.0:10000
+
+remote machine:
+xpra attach tcp:[remoteIP]:10000
+
+############################## remote docker image via xpra ssh ###
+
+host machine (put in script file and run ./ from cmd change permission to exec):
+read Xenv < <(x11docker --xvfb --display=9999 --no-auth --showenv <your nvidia-base-game-app here> xterm)
+env $Xenv xpra start :9999 --use-display --start-via-proxy=no --daemon=no
+
+remote machine:
+xpra attach ssh://[remote_usernam@remoteIP]/9999
+
+############################## remote docker xpra html tcp ###
+
+read Xenv < <(x11docker --xvfb --display=9999 --no-auth --showenv <your nvidia-base-game-app here>  xterm)
+env $Xenv xpra start :9999 --use-display --start-via-proxy=no --daemon=no --bind-tcp=0.0.0.0:14500 --html=on
+
+remote machine:
+in browser: [hostIP]:14500
+
 
