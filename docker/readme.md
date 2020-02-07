@@ -1,2 +1,2 @@
 
-need to install nvidai_docker base image first
+need to install x11docker/nvidia-base base image first
