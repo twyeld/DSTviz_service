@@ -1,1 +1,1 @@
-make sure to unzip the unity build file before running docker
+make sure to unzip the unity build file 'b2c-w-graphs.zip' before running docker
