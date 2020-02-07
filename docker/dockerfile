@@ -1,0 +1,5 @@
+FROM x11docker/nvidia-base
+RUN apt-get update && apt-get install -y xterm
+COPY binGL /home/app/
+COPY dec2019-x86_64compile /home/app/
+CMD xterm

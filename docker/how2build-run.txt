@@ -1,0 +1,27 @@
+
+to build:
+docker build -t nvidia-base-game-app-xorg-gl-unity .
+[old] docker build -t nvidia-base-game-app-xorg-gl .
+[older] docker build -t nvidia-base-game-app-xorg .
+
+to run:
+x11docker --hostdisplay --gpu nvidia-base-game-app-xorg-gl-unity xterm
+[old] x11docker --hostdisplay --gpu nvidia-base-game-app-xorg-gl xterm
+[older] x11docker --hostdisplay --gpu nvidia-base-game-app-xorg xterm
+
+or use xorg bash script
+
+to run game - go to:
+cd home/app
+
+then:
+./<my_game.x86_64>
+
+<<<<<<<<<<<<< to add game levels >>>>>>>>>>>>>>
+
+in separate window after starting container navigate to local drive with game level - then:
+docker container ps
+
+docker cp <folder with game> <containerID>:/home/app/
+
+to make game level permanently copied to container need to load through dockerfile
