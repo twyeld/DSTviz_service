@@ -1,1 +1,2 @@
-
+read Xenv < <(x11docker --xorg --gpu --display=9999 --xtest --no-auth --showenv <your nvidia-base-game-app here> xterm)
+env $Xenv xpra start :9999 --use-display --start-via-proxy=no --daemon=no --bind-tcp=0.0.0.0:10000 --html=on
